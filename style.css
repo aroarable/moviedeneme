@@ -7,69 +7,89 @@
 
 body {
   background: #0b0f1a;
-  color: #fff;
+  color: white;
 }
 
-/* Navbar */
+/* NAVBAR */
 .navbar {
-  padding: 20px;
-  background: #050814;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: linear-gradient(90deg,#050814,#0b0f1a);
   border-bottom: 1px solid #1e2740;
 }
 
-/* Grid */
-.film-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 30px;
+.navbar h1 {
+  font-family: 'Times New Roman';
+  color: bisque;
+  font-size: 22px;
 }
 
-/* Film Card */
+.copyright { color:red; }
+
+.navbar input {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #121a2f;
+  color: white;
+}
+
+/* GRID */
+.film-grid {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
 .film-card {
   background: #121a2f;
   border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: .3s;
 }
 
 .film-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(120, 100, 255, 0.5);
+  box-shadow: 0 0 20px rgba(120,100,255,.5);
 }
 
-/* Poster */
 .poster {
   height: 220px;
-  background: linear-gradient(135deg, #3a4fff, #7a5cff);
+  background-size: cover;
+  background-position: center;
   border-radius: 12px 12px 0 0;
 }
 
-/* Film Title */
 .film-card h3 {
   padding: 12px;
   text-align: center;
 }
 
-/* Video Modal */
+/* PLAYER */
 #playerModal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,.95);
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 9999;
 }
 
-#playerModal video {
-  width: 80%;
-  max-width: 900px;
+#drivePlayer {
+  width: 90vw;
+  height: 90vh;
+  max-width: 1400px;
   border-radius: 12px;
+  border: none;
+  background: black;
 }
 
-/* Close Button */
 .close {
   position: absolute;
   top: 30px;
@@ -77,110 +97,58 @@ body {
   font-size: 28px;
   cursor: pointer;
 }
-.poster {
-  height: 220px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 12px 12px 0 0;
-}
-.rengarenk{
-    animation: rgbcolor 2.5s infinite linear;
-    font-weight: bold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-@keyframes rgbcolor{
-     0%   { color: rgb(255, 0, 0); }     /* Kırmızı */
-  16%  { color: rgb(255, 165, 0); }   /* Turuncu */
-  32%  { color: rgb(255, 255, 0); }   /* Sarı */
-  48%  { color: rgb(0, 255, 0); }     /* Yeşil */
-  64%  { color: rgb(0, 255, 255); }   /* Cyan */
-  80%  { color: rgb(0, 0, 255); }     /* Mavi */
-  100% { color: rgb(255, 0, 255); }   /* Mor */
-}
-/* Navbar düzeni */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  background: linear-gradient(90deg, #050814, #0b0f1a);
-}
 
-.nav-left h1 {
-  font-family: 'Times New Roman', Times, serif;
-  color: bisque;
-  font-size: 22px;
-}
-
-.copyright {
-  color: red;
-}
-
-/* Arama */
-.nav-right input {
-  padding: 10px 14px;
-  border-radius: 8px;
+#nextPartBtn {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  padding: 12px 18px;
+  background: #6c7cff;
+  color: white;
   border: none;
-  outline: none;
-  background: #121a2f;
-  color: #fff;
-  font-size: 14px;
-  width: 220px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: none;
 }
 
-.nav-right input::placeholder {
-  color: #aaa;
-}
-
-/* Grid daha dengeli */
-.film-grid {
-  max-width: 1200px;
-  margin: auto;
-}
-
-/* Footer */
-.footer {
-  margin-top: 50px;
-  padding: 20px;
-  background: #050814;
-  border-top: 1px solid #1e2740;
-  text-align: center;
-  color: #aaa;
-  font-size: 14px;
-}
-
-.footer span {
-  color: #6c7cff;
-}
-
-/* Mobil uyum */
-@media (max-width: 768px) {
-  .film-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .navbar {
-    flex-direction: column;
-    gap: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .film-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .nav-right input {
-    width: 100%;
-  }
-}
+/* FOOTER */
 footer {
-  border-top: 1px solid #1f2937;
+  margin-top: 150px;
   padding: 20px;
   text-align: center;
   color: #9ca3af;
-  font-size: 14px;
-  background: rgba(5,8,20,0.95);
-  margin-top: 160px;
+  border-top: 1px solid #1f2937;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .film-grid { grid-template-columns: repeat(2,1fr); }
+}
+
+@media(max-width:480px){
+  .film-grid { grid-template-columns: 1fr; }
+}
+
+.rengarenk{
+  animation: rgbcolor 2.5s infinite linear;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+@keyframes rgbcolor{
+  0% { color: rgb(255, 0, 0); }
+  16% { color: rgb(255, 165, 0); }
+  32% { color: rgb(255, 255, 0); }
+  48% { color: rgb(0, 255, 0); }
+  64% { color: rgb(0, 255, 255); }
+  80% { color: rgb(0, 0, 255); }
+  100% { color: rgb(255, 0, 255); }
+}
+
+/* KAR CANVAS (EKLENEN TEK CSS) */
+#snowCanvas{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
 }

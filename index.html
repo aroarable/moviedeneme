@@ -4,18 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bakımdayız | Emre Can Kayabaş</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --accent:#9fd3ff;
-  --dark:#0b1220;
-  --glass:rgba(255,255,255,0.08);
-  --border:rgba(255,255,255,0.18);
+  --glass:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.18);
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Montserrat,sans-serif}
 
 body{
   min-height:100vh;
@@ -26,28 +24,17 @@ body{
   overflow:hidden;
 }
 
-/* ===== NAVBAR ===== */
+/* NAVBAR */
 .navbar{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
   height:70px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 40px;
-  background:rgba(0,0,0,.25);
+  background:rgba(0,0,0,.3);
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--border);
-  z-index:5;
 }
-
-.navbar .logo{
-  font-weight:700;
-  font-size:18px;
-}
-
 .badge{
   padding:6px 14px;
   border-radius:20px;
@@ -56,22 +43,15 @@ body{
   border:1px solid var(--border);
 }
 
-/* ===== SNOW ===== */
-canvas{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:1;
-}
+/* SNOW */
+canvas{position:fixed;inset:0;pointer-events:none;z-index:1}
 
-/* ===== MAIN ===== */
+/* MAIN */
 .main{
-  min-height:100vh;
+  height:calc(100vh - 130px);
   display:flex;
   align-items:center;
   justify-content:center;
-  padding-top:70px;
-  padding-bottom:80px;
 }
 
 .container{
@@ -81,124 +61,113 @@ canvas{
   padding:60px;
   background:var(--glass);
   border:1px solid var(--border);
-  border-radius:28px;
-  backdrop-filter: blur(18px);
-  box-shadow:0 50px 120px rgba(0,0,0,.7);
+  border-radius:26px;
+  backdrop-filter:blur(18px);
   display:grid;
   grid-template-columns:1.1fr 1fr;
-  gap:50px;
+  gap:40px;
   z-index:2;
   overflow:hidden;
 }
 
 /* KAR BİRİKME */
-.container::after{
-  content:"";
+.snow-pile{
   position:absolute;
   bottom:0;
   left:0;
   width:100%;
-  height:80px;
-  background:linear-gradient(to top, rgba(255,255,255,.35), transparent);
+  height:45px;
+  background:linear-gradient(to top, rgba(255,255,255,.6), transparent);
   filter:blur(6px);
-  opacity:.8;
-  pointer-events:none;
+  z-index:3;
+}
+
+/* ASILI TABELA */
+.sign{
+  position:absolute;
+  top:-55px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#9fd3ff;
+  color:#021221;
+  padding:16px 40px;
+  border-radius:14px;
+  font-weight:700;
+  animation:swing 4s ease-in-out infinite;
+}
+.sign::before,.sign::after{
+  content:"";
+  position:absolute;
+  top:-18px;
+  width:2px;
+  height:18px;
+  background:#ccc;
+}
+.sign::before{left:20px}
+.sign::after{right:20px}
+
+@keyframes swing{
+  0%{transform:translateX(-50%) rotate(2deg)}
+  50%{transform:translateX(-50%) rotate(-2deg)}
+  100%{transform:translateX(-50%) rotate(2deg)}
 }
 
 /* LEFT */
-.left h1{
-  font-size:42px;
-  margin-bottom:16px;
-}
-.left h1 span{color:var(--accent);}
-.left p{
-  opacity:.85;
-  line-height:1.8;
-  margin-bottom:35px;
-}
-
-.status{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:35px;
-}
-
+.left h1{font-size:40px;margin-bottom:14px}
+.left p{opacity:.85;line-height:1.7;margin-bottom:24px}
+.status{display:flex;align-items:center;gap:10px;margin-bottom:26px}
 .dot{
-  width:10px;
-  height:10px;
-  background:#5effff;
-  border-radius:50%;
-  animation:pulse 1.5s infinite;
+  width:10px;height:10px;background:#5effff;border-radius:50%;
+  animation:pulse 1.5s infinite
 }
-
 @keyframes pulse{
   0%{box-shadow:0 0 0 0 rgba(94,255,255,.7)}
-  70%{box-shadow:0 0 0 14px rgba(94,255,255,0)}
+  70%{box-shadow:0 0 0 12px rgba(94,255,255,0)}
 }
 
 /* COUNTDOWN */
-.countdown{
-  display:flex;
-  gap:16px;
-}
-
+.countdown{display:flex;gap:14px}
 .time{
-  background:rgba(0,0,0,.35);
-  padding:16px 18px;
-  border-radius:14px;
-  min-width:90px;
+  background:rgba(0,0,0,.4);
+  padding:14px 16px;
+  border-radius:12px;
+  min-width:80px;
   text-align:center;
-  border:1px solid var(--border);
+  border:1px solid var(--border)
 }
+.time h2{font-size:24px}
+.time span{font-size:11px;opacity:.7}
 
-.time h2{font-size:26px;}
-.time span{font-size:12px;opacity:.7}
-
-/* RIGHT */
+/* PREVIEW */
 .preview-box{
-  background:rgba(0,0,0,.35);
+  background:rgba(0,0,0,.45);
   border:1px solid var(--border);
-  border-radius:20px;
-  padding:14px;
-  box-shadow:inset 0 0 40px rgba(0,0,0,.5);
+  border-radius:18px;
+  padding:12px;
 }
-
 .preview-box iframe{
   width:100%;
-  height:240px;
+  height:220px;
   border:none;
-  border-radius:14px;
-  transform:scale(.85);
-  transform-origin:top left;
-  transition:.4s;
+  border-radius:12px;
 }
-
-.preview-box:hover iframe{
-  transform:scale(.9);
+.preview-text{
+  margin-top:10px;
+  font-size:12px;
+  opacity:.75;
+  text-align:center;
 }
 
 /* FOOTER */
 footer{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
   height:60px;
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:13px;
-  background:rgba(0,0,0,.25);
+  background:rgba(0,0,0,.3);
   backdrop-filter:blur(10px);
   border-top:1px solid var(--border);
-  z-index:5;
-}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  .container{grid-template-columns:1fr}
-  .preview-box iframe{height:200px}
 }
 </style>
 </head>
@@ -206,7 +175,7 @@ footer{
 <body>
 
 <div class="navbar">
-  <div class="logo">Emre Can Kayabaş</div>
+  <strong>Emre Can Kayabaş</strong>
   <div class="badge">Maintenance Mode</div>
 </div>
 
@@ -215,12 +184,12 @@ footer{
 <div class="main">
   <div class="container">
 
+    <div class="sign">BAKIMDAYIZ</div>
+    <div class="snow-pile"></div>
+
     <div class="left">
-      <h1>Bakımdayız <span>❄️</span></h1>
-      <p>
-        Sistem, tasarım ve performans iyileştirmeleri devam etmektedir.
-        Daha güçlü ve modern bir deneyimle yakında tekrar yayındayız.
-      </p>
+      <h1>Bakım Süreci ❄️</h1>
+      <p>Sistem, tasarım ve performans iyileştirmeleri devam etmektedir.</p>
 
       <div class="status">
         <div class="dot"></div>
@@ -228,16 +197,19 @@ footer{
       </div>
 
       <div class="countdown">
-        <div class="time"><h2 id="d">--</h2><span>Gün</span></div>
-        <div class="time"><h2 id="h">--</h2><span>Saat</span></div>
-        <div class="time"><h2 id="m">--</h2><span>Dakika</span></div>
-        <div class="time"><h2 id="s">--</h2><span>Saniye</span></div>
+        <div class="time"><h2 id="d">0</h2><span>Gün</span></div>
+        <div class="time"><h2 id="h">0</h2><span>Saat</span></div>
+        <div class="time"><h2 id="m">0</h2><span>Dakika</span></div>
+        <div class="time"><h2 id="s">0</h2><span>Saniye</span></div>
       </div>
     </div>
 
     <div class="right">
       <div class="preview-box">
         <iframe src="https://troxway.vercel.app"></iframe>
+        <div class="preview-text">
+          Bu site açılana kadar burası aktif ön izleme alanıdır
+        </div>
       </div>
     </div>
 
@@ -250,28 +222,28 @@ footer{
 
 <script>
 /* COUNTDOWN */
-function updateCountdown(){
+const dEl=d,hEl=h,mEl=m,sEl=s;
+function tick(){
   const now=new Date();
-  let target=new Date(now.getFullYear(),5,15,0,0,0);
+  let target=new Date(now.getFullYear(),5,15);
   if(target<now)target.setFullYear(now.getFullYear()+1);
   const diff=target-now;
-  d.textContent=Math.floor(diff/86400000);
-  h.textContent=Math.floor(diff/3600000)%24;
-  m.textContent=Math.floor(diff/60000)%60;
-  s.textContent=Math.floor(diff/1000)%60;
+  dEl.textContent=Math.floor(diff/86400000);
+  hEl.textContent=Math.floor(diff/3600000)%24;
+  mEl.textContent=Math.floor(diff/60000)%60;
+  sEl.textContent=Math.floor(diff/1000)%60;
 }
-setInterval(updateCountdown,1000);
-updateCountdown();
+tick();setInterval(tick,1000);
 
 /* SNOW */
 const c=document.getElementById("snow"),x=c.getContext("2d");
 let w,h,flakes=[];
 function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
 resize();onresize=resize;
-for(let i=0;i<180;i++)flakes.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*3+1,s:Math.random()*1+0.6});
+for(let i=0;i<160;i++)flakes.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*3+1,s:Math.random()*1+0.6});
 (function snow(){
   x.clearRect(0,0,w,h);
-  x.fillStyle="rgba(255,255,255,.8)";
+  x.fillStyle="rgba(255,255,255,.85)";
   x.beginPath();
   flakes.forEach(f=>{x.moveTo(f.x,f.y);x.arc(f.x,f.y,f.r,0,Math.PI*2)});
   x.fill();

@@ -15,17 +15,13 @@
   --border:rgba(255,255,255,0.18);
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Montserrat',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif;}
 
 body{
   min-height:100vh;
   background:
-    radial-gradient(circle at top, rgba(159,211,255,.25), transparent 45%),
+    radial-gradient(circle at 20% 0%, rgba(159,211,255,.18), transparent 40%),
+    radial-gradient(circle at 80% 100%, rgba(159,211,255,.12), transparent 40%),
     linear-gradient(135deg,#05070c,#0a1220);
   color:#fff;
   display:flex;
@@ -34,7 +30,22 @@ body{
   overflow:hidden;
 }
 
-/* ===== SNOW CANVAS ===== */
+/* ===== FLOATING LIGHTS ===== */
+body::after{
+  content:"";
+  position:absolute;
+  inset:-50%;
+  background:conic-gradient(from 180deg, transparent, rgba(159,211,255,.08), transparent);
+  animation:rotate 40s linear infinite;
+  z-index:0;
+}
+
+@keyframes rotate{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* ===== SNOW ===== */
 canvas{
   position:fixed;
   inset:0;
@@ -47,47 +58,45 @@ canvas{
   position:relative;
   z-index:2;
   width:90%;
-  max-width:1100px;
+  max-width:1200px;
   padding:60px;
   background:var(--glass);
   border:1px solid var(--border);
-  border-radius:26px;
-  backdrop-filter: blur(16px);
-  box-shadow:0 40px 90px rgba(0,0,0,.7);
+  border-radius:28px;
+  backdrop-filter: blur(18px);
+  box-shadow:0 50px 120px rgba(0,0,0,.75);
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1.2fr 1fr;
   gap:60px;
   animation:fadein 1.2s ease forwards;
 }
 
 @keyframes fadein{
-  from{opacity:0;transform:translateY(30px)}
+  from{opacity:0;transform:translateY(40px)}
   to{opacity:1;transform:none}
 }
 
 /* ===== LEFT ===== */
 .left h1{
-  font-size:46px;
+  font-size:48px;
   font-weight:700;
-  margin-bottom:15px;
+  margin-bottom:18px;
 }
 
-.left h1 span{
-  color:var(--accent);
-}
+.left h1 span{color:var(--accent);}
 
 .left p{
   font-size:16px;
   opacity:.85;
-  line-height:1.7;
-  margin-bottom:35px;
+  line-height:1.8;
+  margin-bottom:40px;
 }
 
 .status{
   display:flex;
   align-items:center;
-  gap:12px;
-  margin-bottom:35px;
+  gap:14px;
+  margin-bottom:40px;
 }
 
 .dot{
@@ -95,56 +104,61 @@ canvas{
   height:12px;
   background:#5effff;
   border-radius:50%;
-  animation:pulse 1.6s infinite;
+  animation:pulse 1.5s infinite;
 }
 
 @keyframes pulse{
   0%{box-shadow:0 0 0 0 rgba(94,255,255,.7)}
-  70%{box-shadow:0 0 0 15px rgba(94,255,255,0)}
+  70%{box-shadow:0 0 0 18px rgba(94,255,255,0)}
   100%{box-shadow:0 0 0 0 rgba(94,255,255,0)}
 }
 
 .countdown{
   display:flex;
-  gap:20px;
+  gap:18px;
 }
 
 .time{
   background:rgba(0,0,0,.35);
   padding:18px 22px;
-  border-radius:14px;
+  border-radius:16px;
   min-width:90px;
   text-align:center;
   border:1px solid var(--border);
+  animation:float 4s ease-in-out infinite;
 }
 
-.time h2{
-  font-size:28px;
+.time:nth-child(2){animation-delay:.3s}
+.time:nth-child(3){animation-delay:.6s}
+.time:nth-child(4){animation-delay:.9s}
+
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+  100%{transform:translateY(0)}
 }
 
-.time span{
-  font-size:12px;
-  opacity:.7;
-}
+.time h2{font-size:28px;}
+.time span{font-size:12px;opacity:.7}
 
 /* ===== RIGHT ===== */
 .board{
-  background:linear-gradient(135deg,#b7e3ff,#6bbcff);
+  background:linear-gradient(135deg,#cfeaff,#7fc7ff);
   color:#021221;
-  padding:42px;
-  border-radius:24px;
+  padding:44px;
+  border-radius:26px;
   text-align:center;
-  font-size:32px;
+  font-size:34px;
   font-weight:700;
-  box-shadow:0 30px 70px rgba(107,188,255,.55);
+  box-shadow:0 35px 90px rgba(127,199,255,.55);
   animation:swing 5s ease-in-out infinite;
   transform-origin:top center;
 }
 
 @keyframes swing{
-  0%{transform:rotate(1.5deg)}
-  50%{transform:rotate(-1.5deg)}
-  100%{transform:rotate(1.5deg)}
+  0%{transform:rotate(1.2deg)}
+  50%{transform:rotate(-1.2deg)}
+  100%{transform:rotate(1.2deg)}
 }
 
 .contact{
@@ -153,12 +167,49 @@ canvas{
   opacity:.85;
 }
 
-.contact a{
-  color:#fff;
-  text-decoration:none;
-  font-weight:600;
+.contact a{color:#fff;text-decoration:none;font-weight:600}
+
+/* ===== LIVE PREVIEW ===== */
+.preview{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:320px;
+  height:200px;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:#000;
+  z-index:3;
+  box-shadow:0 20px 60px rgba(0,0,0,.7);
+  transition:.4s;
 }
 
+.preview:hover{
+  width:420px;
+  height:260px;
+}
+
+.preview::before{
+  content:"LIVE PREVIEW";
+  position:absolute;
+  top:8px;
+  left:10px;
+  font-size:11px;
+  letter-spacing:1px;
+  opacity:.7;
+  z-index:2;
+}
+
+.preview iframe{
+  width:100%;
+  height:100%;
+  border:none;
+  transform:scale(.6);
+  transform-origin:0 0;
+}
+
+/* ===== FOOTER ===== */
 footer{
   position:absolute;
   bottom:20px;
@@ -170,13 +221,8 @@ footer{
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
-  .container{
-    grid-template-columns:1fr;
-    padding:40px;
-  }
-  .left h1{
-    font-size:34px;
-  }
+  .container{grid-template-columns:1fr}
+  .preview{display:none}
 }
 </style>
 </head>
@@ -186,18 +232,17 @@ footer{
 <canvas id="snow"></canvas>
 
 <div class="container">
-
   <div class="left">
     <h1>Emre <span>Can Kayabaş</span></h1>
     <p>
-      Altyapı ve sistem iyileştirmeleri nedeniyle bakım çalışmaları
-      devam etmektedir. Daha güçlü, daha stabil ve daha modern
-      bir deneyimle yakında tekrar yayındayız.
+      Sistem altyapısı, animasyonlar ve performans optimizasyonları
+      üzerinde aktif olarak çalışıyoruz. Bakım süreci devam ederken
+      aşağıdan canlı ön izleme ile ilerlemeyi görebilirsiniz.
     </p>
 
     <div class="status">
       <div class="dot"></div>
-      <span>Bakım Modu Aktif</span>
+      <span>Deploy & Maintenance Active</span>
     </div>
 
     <div class="countdown">
@@ -210,13 +255,15 @@ footer{
 
   <div class="right">
     <div class="board">BAKIMDAYIZ</div>
-
     <div class="contact">
       📧 info@gmail.com<br>
       🌐 <a href="https://troxway.vercel.app" target="_blank">troxway.vercel.app</a>
     </div>
   </div>
+</div>
 
+<div class="preview">
+  <iframe src="https://troxway.vercel.app"></iframe>
 </div>
 
 <footer>
@@ -227,60 +274,30 @@ footer{
 /* ===== COUNTDOWN TO 15 JUNE ===== */
 function updateCountdown(){
   const now = new Date();
-  const year = now.getFullYear();
-  const target = new Date(year, 5, 15, 0, 0, 0); // June = 5
-
-  if(target < now) target.setFullYear(year + 1);
-
+  let target = new Date(now.getFullYear(),5,15,0,0,0);
+  if(target < now) target.setFullYear(now.getFullYear()+1);
   const diff = target - now;
 
-  document.getElementById("d").innerText = Math.floor(diff / (1000*60*60*24));
-  document.getElementById("h").innerText = Math.floor((diff / (1000*60*60)) % 24);
-  document.getElementById("m").innerText = Math.floor((diff / (1000*60)) % 60);
-  document.getElementById("s").innerText = Math.floor((diff / 1000) % 60);
+  d.innerText = Math.floor(diff / (1000*60*60*24));
+  h.innerText = Math.floor((diff / (1000*60*60)) % 24);
+  m.innerText = Math.floor((diff / (1000*60)) % 60);
+  s.innerText = Math.floor((diff / 1000) % 60);
 }
-setInterval(updateCountdown,1000);
-updateCountdown();
+setInterval(updateCountdown,1000);updateCountdown();
 
-/* ===== SNOW EFFECT ===== */
-const canvas = document.getElementById("snow");
-const ctx = canvas.getContext("2d");
-let w,h;
-let flakes=[];
-
-function resize(){
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-}
-window.addEventListener("resize",resize);
-resize();
-
-for(let i=0;i<180;i++){
-  flakes.push({
-    x:Math.random()*w,
-    y:Math.random()*h,
-    r:Math.random()*3+1,
-    s:Math.random()*1+0.5
-  });
-}
-
+/* ===== SNOW ===== */
+const c=document.getElementById("snow"),x=c.getContext("2d");
+let w,h,flakes=[];
+function r(){w=c.width=innerWidth;h=c.height=innerHeight}
+onresize=r;r();
+for(let i=0;i<220;i++)flakes.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*3+1,s:Math.random()*1+0.5});
 function snow(){
-  ctx.clearRect(0,0,w,h);
-  ctx.fillStyle="rgba(255,255,255,.8)";
-  ctx.beginPath();
-  flakes.forEach(f=>{
-    ctx.moveTo(f.x,f.y);
-    ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
-  });
-  ctx.fill();
-
-  flakes.forEach(f=>{
-    f.y+=f.s;
-    if(f.y>h){
-      f.y=0;
-      f.x=Math.random()*w;
-    }
-  });
+  x.clearRect(0,0,w,h);
+  x.fillStyle="rgba(255,255,255,.8)";
+  x.beginPath();
+  flakes.forEach(f=>{x.moveTo(f.x,f.y);x.arc(f.x,f.y,f.r,0,Math.PI*2);});
+  x.fill();
+  flakes.forEach(f=>{f.y+=f.s;if(f.y>h){f.y=0;f.x=Math.random()*w}});
   requestAnimationFrame(snow);
 }
 snow();

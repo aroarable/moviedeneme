@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Movie | Bakımdayız</title>
+<title>Bakımdayız | Emre Can Kayabaş</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --main:#ff5625;
-  --dark:#0b0d12;
+  --accent:#9fd3ff;
+  --dark:#05070c;
   --glass:rgba(255,255,255,0.08);
-  --border:rgba(255,255,255,0.15);
+  --border:rgba(255,255,255,0.18);
 }
 
 *{
@@ -25,8 +25,8 @@
 body{
   min-height:100vh;
   background:
-    radial-gradient(circle at top, rgba(255,86,37,.25), transparent 45%),
-    linear-gradient(135deg,#07090d,#0b0d12);
+    radial-gradient(circle at top, rgba(159,211,255,.25), transparent 45%),
+    linear-gradient(135deg,#05070c,#0a1220);
   color:#fff;
   display:flex;
   align-items:center;
@@ -34,38 +34,26 @@ body{
   overflow:hidden;
 }
 
-/* ===== BACKGROUND ANIMATION ===== */
-body::before{
-  content:"";
-  position:absolute;
+/* ===== SNOW CANVAS ===== */
+canvas{
+  position:fixed;
   inset:0;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      rgba(255,255,255,0.03),
-      rgba(255,255,255,0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    );
-  animation: bgmove 20s linear infinite;
-  z-index:-1;
-}
-
-@keyframes bgmove{
-  from{background-position:0 0;}
-  to{background-position:200px 200px;}
+  pointer-events:none;
+  z-index:1;
 }
 
 /* ===== MAIN CARD ===== */
 .container{
+  position:relative;
+  z-index:2;
   width:90%;
   max-width:1100px;
   padding:60px;
   background:var(--glass);
   border:1px solid var(--border);
-  border-radius:24px;
-  backdrop-filter: blur(14px);
-  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  border-radius:26px;
+  backdrop-filter: blur(16px);
+  box-shadow:0 40px 90px rgba(0,0,0,.7);
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:60px;
@@ -79,13 +67,13 @@ body::before{
 
 /* ===== LEFT ===== */
 .left h1{
-  font-size:48px;
+  font-size:46px;
   font-weight:700;
   margin-bottom:15px;
 }
 
 .left h1 span{
-  color:var(--main);
+  color:var(--accent);
 }
 
 .left p{
@@ -105,22 +93,17 @@ body::before{
 .dot{
   width:12px;
   height:12px;
-  background:#2aff7b;
+  background:#5effff;
   border-radius:50%;
-  animation:pulse 1.5s infinite;
+  animation:pulse 1.6s infinite;
 }
 
 @keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(42,255,123,.7)}
-  70%{box-shadow:0 0 0 15px rgba(42,255,123,0)}
-  100%{box-shadow:0 0 0 0 rgba(42,255,123,0)}
+  0%{box-shadow:0 0 0 0 rgba(94,255,255,.7)}
+  70%{box-shadow:0 0 0 15px rgba(94,255,255,0)}
+  100%{box-shadow:0 0 0 0 rgba(94,255,255,0)}
 }
 
-.status span{
-  font-weight:600;
-}
-
-/* ===== COUNTDOWN ===== */
 .countdown{
   display:flex;
   gap:20px;
@@ -145,28 +128,23 @@ body::before{
 }
 
 /* ===== RIGHT ===== */
-.right{
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-
 .board{
-  background:linear-gradient(135deg,#ff5625,#ff7a45);
-  padding:40px;
-  border-radius:22px;
+  background:linear-gradient(135deg,#b7e3ff,#6bbcff);
+  color:#021221;
+  padding:42px;
+  border-radius:24px;
   text-align:center;
-  font-size:34px;
+  font-size:32px;
   font-weight:700;
-  box-shadow:0 25px 60px rgba(255,86,37,.45);
-  animation:swing 4s ease-in-out infinite;
+  box-shadow:0 30px 70px rgba(107,188,255,.55);
+  animation:swing 5s ease-in-out infinite;
   transform-origin:top center;
 }
 
 @keyframes swing{
-  0%{transform:rotate(2deg)}
-  50%{transform:rotate(-2deg)}
-  100%{transform:rotate(2deg)}
+  0%{transform:rotate(1.5deg)}
+  50%{transform:rotate(-1.5deg)}
+  100%{transform:rotate(1.5deg)}
 }
 
 .contact{
@@ -187,7 +165,7 @@ footer{
   width:100%;
   text-align:center;
   font-size:13px;
-  opacity:.5;
+  opacity:.55;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -197,7 +175,7 @@ footer{
     padding:40px;
   }
   .left h1{
-    font-size:36px;
+    font-size:34px;
   }
 }
 </style>
@@ -205,19 +183,21 @@ footer{
 
 <body>
 
+<canvas id="snow"></canvas>
+
 <div class="container">
 
   <div class="left">
-    <h1>Emre Can<span>Kayabaş</span></h1>
+    <h1>Emre <span>Can Kayabaş</span></h1>
     <p>
-      Altyapımız üzerinde kapsamlı bakım ve performans iyileştirmeleri
-      gerçekleştiriyoruz. Daha güvenli, daha hızlı ve daha modern bir
-      deneyimle çok yakında tekrar yayındayız.
+      Altyapı ve sistem iyileştirmeleri nedeniyle bakım çalışmaları
+      devam etmektedir. Daha güçlü, daha stabil ve daha modern
+      bir deneyimle yakında tekrar yayındayız.
     </p>
 
     <div class="status">
       <div class="dot"></div>
-      <span>Sistem Güncellemesi Aktif</span>
+      <span>Bakım Modu Aktif</span>
     </div>
 
     <div class="countdown">
@@ -233,32 +213,78 @@ footer{
 
     <div class="contact">
       📧 info@gmail.com<br>
-      🌐 <a href="https://www.4lphasoftware.com">troxway.vercel.app</a>
+      🌐 <a href="https://troxway.vercel.app" target="_blank">troxway.vercel.app</a>
     </div>
   </div>
 
 </div>
 
 <footer>
-© 2025 Emre Can Kayabaş – Tüm Hakları Saklıdır.
+© 2025 Emre Can Kayabaş – All rights reserved.
 </footer>
 
 <script>
-const target = new Date("2025-02-01T12:00:00").getTime();
+/* ===== COUNTDOWN TO 15 JUNE ===== */
+function updateCountdown(){
+  const now = new Date();
+  const year = now.getFullYear();
+  const target = new Date(year, 5, 15, 0, 0, 0); // June = 5
 
-setInterval(()=>{
-  const now = new Date().getTime();
+  if(target < now) target.setFullYear(year + 1);
+
   const diff = target - now;
-
-  if(diff <= 0) return;
 
   document.getElementById("d").innerText = Math.floor(diff / (1000*60*60*24));
   document.getElementById("h").innerText = Math.floor((diff / (1000*60*60)) % 24);
   document.getElementById("m").innerText = Math.floor((diff / (1000*60)) % 60);
   document.getElementById("s").innerText = Math.floor((diff / 1000) % 60);
-},1000);
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+/* ===== SNOW EFFECT ===== */
+const canvas = document.getElementById("snow");
+const ctx = canvas.getContext("2d");
+let w,h;
+let flakes=[];
+
+function resize(){
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener("resize",resize);
+resize();
+
+for(let i=0;i<180;i++){
+  flakes.push({
+    x:Math.random()*w,
+    y:Math.random()*h,
+    r:Math.random()*3+1,
+    s:Math.random()*1+0.5
+  });
+}
+
+function snow(){
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle="rgba(255,255,255,.8)";
+  ctx.beginPath();
+  flakes.forEach(f=>{
+    ctx.moveTo(f.x,f.y);
+    ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+  });
+  ctx.fill();
+
+  flakes.forEach(f=>{
+    f.y+=f.s;
+    if(f.y>h){
+      f.y=0;
+      f.x=Math.random()*w;
+    }
+  });
+  requestAnimationFrame(snow);
+}
+snow();
 </script>
 
 </body>
 </html>
-
